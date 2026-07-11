@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#295f54" />
+    <title>勤務時間メモ</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <p class="eyebrow">WORK TIME TRACKER</p>
+        <h1>勤務時間メモ</h1>
+        <p>毎日の勤務を記録して、残業時間をかんたんに確認できます。</p>
+      </header>
+
+      <section class="summary" aria-label="残業時間の集計">
+        <article class="summary-card">
+          <span>今週の残業</span>
+          <strong id="weeklyOvertime">0時間00分</strong>
+        </article>
+        <article class="summary-card accent">
+          <span>今月の残業</span>
+          <strong id="monthlyOvertime">0時間00分</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="section-number">01</p>
+            <h2>勤務を入力</h2>
+          </div>
+          <span class="required-note">すべて必須</span>
+        </div>
+
+        <form id="workForm">
+          <div class="form-grid">
+            <label class="field field-wide">
+              <span>日付</span>
+              <input id="workDate" type="date" required />
+            </label>
+            <label class="field">
+              <span>勤務開始</span>
+              <input id="startTime" type="time" required />
+            </label>
+            <label class="field">
+              <span>勤務終了</span>
+              <input id="endTime" type="time" required />
+            </label>
+            <label class="field field-wide">
+              <span>休憩時間（分）</span>
+              <input id="breakMinutes" type="number" min="0" step="1" value="60" inputmode="numeric" required />
+            </label>
+          </div>
+
+          <p id="formMessage" class="form-message" role="alert" aria-live="polite"></p>
+          <button class="save-button" type="submit">この勤務を記録する</button>
+        </form>
+      </section>
+
+      <section class="panel records-panel">
+        <div class="section-heading">
+          <div>
+            <p class="section-number">02</p>
+            <h2>勤務記録</h2>
+          </div>
+          <span id="recordCount" class="record-count">0件</span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <span aria-hidden="true">☕</span>
+          <p>まだ勤務記録がありません。</p>
+        </div>
+        <div id="recordList" class="record-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="recordTemplate">
+      <article class="record-card">
+        <div class="record-date"></div>
+        <div class="record-details">
+          <div><span>勤務</span><strong class="record-range"></strong></div>
+          <div><span>休憩</span><strong class="record-break"></strong></div>
+          <div><span>実働</span><strong class="record-work"></strong></div>
+          <div><span>残業</span><strong class="record-overtime"></strong></div>
+        </div>
+        <button class="delete-button" type="button" aria-label="この記録を削除">削除</button>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
