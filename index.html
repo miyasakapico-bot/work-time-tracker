@@ -32,7 +32,15 @@
             <p class="section-number">01</p>
             <h2>勤務を入力</h2>
           </div>
-          <span class="required-note">すべて必須</span>
+          <span id="workStatusLabel" class="status-label">開始前</span>
+        </div>
+
+        <div id="activeWorkStatus" class="active-work-status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <div>
+            <strong id="activeWorkTitle">勤務開始前です</strong>
+            <p id="activeWorkDetail">開始時刻を入力するか、空欄のまま開始ボタンを押してください。</p>
+          </div>
         </div>
 
         <form id="workForm">
@@ -43,11 +51,13 @@
             </label>
             <label class="field">
               <span>勤務開始</span>
-              <input id="startTime" type="time" required />
+              <input id="startTime" type="time" />
+              <small>空欄ならボタンを押した時刻を使います</small>
             </label>
             <label class="field">
               <span>勤務終了</span>
-              <input id="endTime" type="time" required />
+              <input id="endTime" type="time" />
+              <small>退勤時に入力。空欄なら現在時刻を使います</small>
             </label>
             <label class="field field-wide">
               <span>休憩時間（分）</span>
@@ -56,7 +66,11 @@
           </div>
 
           <p id="formMessage" class="form-message" role="alert" aria-live="polite"></p>
-          <button class="save-button" type="submit">この勤務を記録する</button>
+          <div class="action-buttons">
+            <button id="startWorkButton" class="save-button" type="button">勤務開始を保存</button>
+            <button id="endWorkButton" class="save-button end-button" type="button" disabled>勤務終了を保存</button>
+          </div>
+          <button id="cancelWorkButton" class="cancel-button" type="button" hidden>勤務開始を取り消す</button>
         </form>
       </section>
 
